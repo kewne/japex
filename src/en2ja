@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cat $* | shuf | en2ja.awk

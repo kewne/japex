@@ -1,0 +1,13 @@
+りんご:apple
+オレンジ:orange
+なし:pear
+カキ:persimmon
+もも:peach
+いちご:strawberry
+バナナ:banana
+イチジク:fig
+すいか:watermelon
+レモン:lemon
+ミカン:tangerine
+パイナップル:pineapple
+ぶどう:grape
