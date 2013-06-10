@@ -1,7 +1,0 @@
-にちようび:Sunday
-げつようび:Monday
-かようび:Tuesday
-すいようび:Wednesday
-もくようび:Thursday
-きんようび:Friday
-どようび:Saturday

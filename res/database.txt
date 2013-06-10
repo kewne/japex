@@ -1,0 +1,305 @@
+うし:cow
+かに:crab
+さかな:fish
+ねこ:cat
+いぬ:dog
+うま:horse
+むし:insect
+あたま:head
+て:hand
+あし:foot
+ゆび:finger
+くち:mouth
+ほね:bone
+みみ:ear
+め:eye
+あか:red
+あお:blue
+りんご:apple
+オレンジ:orange
+なし:pear
+カキ:persimmon
+もも:peach
+いちご:strawberry
+バナナ:banana
+イチジク:fig
+すいか:watermelon
+レモン:lemon
+ミカン:tangerine
+パイナップル:pineapple
+ぶどう:grape
+しお:salt
+さけ:sake
+かぞく:family
+おじいさん:grandfather
+おばあさん:grandmother
+おとうさん:father
+おかあさん:mother
+おじさん:uncle
+おばさん:aunt
+おねえさん:older sister
+おにいさん:older brother
+いもうと:younger sister
+おとうと:younger brother
+いとこ:cousin
+むすこ:son
+むすめ:daughter
+かのじょ:girlfriend
+かれし:boyfriend
+つま:wife
+おっと:husband
+おはようございます:Good morning
+こんいちは:Good afternoon
+こんばんは:Good evening
+おやすみ:Good night
+さようなら:Goodbye
+すみません:Excuse me
+ごめんなさい:I'm sorry
+ありがとう:Thank you
+ありがとうございます:Thank you very much (polite/formal)
+いってきます:I'm leaving (home)
+いってっらしゃい:+-Safe travel
+ただいま:I'm home
+おかえりなさい:Welcome back
+いただきます:Thank you for the meal (before eating)
+ごちそうさま:Thank you for the meal (after eating)
+はじめまして:Nice to meet you (meeting for first time)
+どうぞよろしく:Please 
+えき:station
+ここ:here
+そこ:there
+うち:house
+いけ:pond
+あせ:sweat
+さか:hill
+しかく:square
+せかい:world
+きそく:regulation
+うそ:lie
+つの:horn
+はし:bridge
+ひ:fire
+へい:wall
+ほし:star
+くに:country
+おかね:money
+はた:flag
+はな:flower
+くも:cloud
+やま:mountain
+ゆき:snow
+よる:night
+さくら:cherry blossom
+はかり:scale
+さる:monkey
+きれ:cloth
+しろ:castle
+かわ:river
+せんす:fan
+きんこ:safe
+かい:shell
+かさ:umbrella
+くし:comb
+え:picture
+いす:chair
+たいこ:drum
+くつ:shoe
+いと:sewing line
+ふえ:flute
+いま:now
+きょう:today
+あした:tomorrow
+きのう:yesterday
+おととい:day before yesterday
+まいにち:every day
+こんしゅう:this week
+せんしゅう:last week
+らいしゅう:next week
+まいしゅう:every week
+せんげつ:last month
+こんげつ:this month
+らいげつ:next month
+まいつき:every month
+きょうねん:last year
+ことし:this year
+らいねん:next year
+まいねん:every year
+にちようび:Sunday
+げつようび:Monday
+かようび:Tuesday
+すいようび:Wednesday
+もくようび:Thursday
+きんようび:Friday
+どようび:Saturday
+いちがつ:January
+にがつ:February
+さんがつ:March
+しがつ:April
+ごがつ:May
+ろくがつ:June
+くがつ:September
+じゅうがつ:October
+じゅういちがつ:November
+じゅうにがつ:December
+あき:fall (Season)
+きせつ:season
+なつ:summer
+ちかてつ:subway
+ふね:ship
+くり:chestnut
+こい:carp
+かた:shoulder
+まり:ball
+もり:woods
+くろ:black
+がか:painter
+めがね:glasses
+ぎんか:silver coin
+かぎ:key
+ぐんじん:army man
+かぐ:furniture
+あたま:head
+うみ:sea
+あめ:rain
+かいもの:shopped goods
+ゆめ:dream
+まくら:pillow
+おつり:change
+こころ:heart
+わたし:I/me
+にわ:garden
+ほんや:bookstore
+げた:japanese sandals
+わなげ:horseshoes (game)
+ごはん:boiled rice
+はいざら:ashtray
+ふじさん:Mount Fuji
+ちず:map
+かぜ:wind
+すいぞくかん:aquarium (building)
+がいこくじん:foreigner
+かがく:chemistry
+ぎんこう:bank
+みが:right
+めぐすり:eye drops
+げんいん:cause
+ひげ:beard/moustache
+かざん:vulcano
+みず:water
+くだもの:fruit
+でんわ:telephone
+まど:window
+かばん:handbag
+えび:shrimp
+しんぶん:newspaper
+かべ:wall
+おぼん:tray/platter
+でんぽ:electric wave
+えんぴつ:pencil
+さんぽ:walk
+ひだり:left
+えだ:branch
+うで:arm
+でんき:electricity
+おどん:dance
+こども:child
+たばこ:cigar
+ゆび:finger
+へび:snake
+ぶんか:culture
+なべ:cooking pot
+ぼいん:vowel
+うた:song
+まめ:bean
+やね:roof
+へや:room
+つくえ:desk
+かみそり:razor
+つき:moon
+つな:rope
+すな:sand
+ちか:underground
+しか:deer
+らっかさん:parachute
+がっき:musical instrument
+せっけん:soap
+けっこん:wedding
+ざっし:magazine
+きって:stamp
+らっぱ:trumpet
+きっぷ:ticket
+ほっぺた:cheek
+いっかい:first floor
+さっか:writer
+にっき:diary
+はっけん:discovery
+けっせき:absence
+わったい:tropical region
+あさって:after tomorrow
+こぎって:check
+しっぱい:mistake
+せいねんがっぴ:birthday (date)
+せんぷうき:fan (electrical appliance)
+ぶうとう:envelope
+とけい:clock
+れいぞうこ:refrigerator
+ひこうき:airplane
+ぼうし:cap
+おおかみ:wolf
+こおり:ice
+えいご:english language
+けいざい:economy
+がくせい:student
+へいわ:peace
+めいし:business card
+くうき:air
+こうつう:transportation
+つうしん:mail
+ぞう:elephant
+ぼうえき:foreign trade
+ぶんぽう:grammar
+おおきい:big
+とおい:located far away
+きゃく:visitor
+ちきゅう:globe
+すいぎゅう:buffalo
+けんびきょう:microscope
+きんぎょ:goldfish
+にんぎょう:doll
+いしゃ:doctor
+じてんしゃ:bicycle
+じんじゃ:shinto sanctuary
+じゅどう:judo
+ほつでんしょ:power plant
+しょうぼうじどうしゃ:firetruck
+きゅうきゅうしゃ:ambulance
+げっきゅう:monthly salary
+べんきょう:study
+ゆうびんきょく:post office
+こうぎょう:industry
+のうぎょう:agriculture
+かいしゃ:company
+うんてんしゃ:driver
+じゅうしょ:address
+びじゅつかん:art museum
+じしょ:dictionary
+しょうがくきん:scholarship
+こうじょう:factory
+こうちゃ:black tea
+かぼちゃ:pumpkin
+ちゅうしゃ:injection
+ちょっかく:square angle
+ちょうちん:paper lantern
+ぎゅうにゅう:cow milk
+ひょうざん:iceberg
+びょういん:hospital
+みゃく:wrist
+りょこう:trip
+りゅう:dragon
+うちゅう:universe
+こうちょう:school principal
+ゆにゅう:import
+びょうき:disease
+みょうじ:last name
+りょうしゅうしょ:receipt
+だいとうりょう:president (of a country)
