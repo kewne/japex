@@ -1,305 +1,305 @@
-うし:cow
-かに:crab
-さかな:fish
-ねこ:cat
-いぬ:dog
-うま:horse
-むし:insect
-あたま:head
-て:hand
-あし:foot
-ゆび:finger
-くち:mouth
-ほね:bone
-みみ:ear
-め:eye
-あか:red
-あお:blue
-りんご:apple
-オレンジ:orange
-なし:pear
-カキ:persimmon
-もも:peach
-いちご:strawberry
-バナナ:banana
-イチジク:fig
-すいか:watermelon
-レモン:lemon
-ミカン:tangerine
-パイナップル:pineapple
-ぶどう:grape
-しお:salt
-さけ:sake
-かぞく:family
-おじいさん:grandfather
-おばあさん:grandmother
-おとうさん:father
-おかあさん:mother
-おじさん:uncle
-おばさん:aunt
-おねえさん:older sister
-おにいさん:older brother
-いもうと:younger sister
-おとうと:younger brother
-いとこ:cousin
-むすこ:son
-むすめ:daughter
-かのじょ:girlfriend
-かれし:boyfriend
-つま:wife
-おっと:husband
-おはようございます:Good morning
-こんいちは:Good afternoon
-こんばんは:Good evening
-おやすみ:Good night
-さようなら:Goodbye
-すみません:Excuse me
-ごめんなさい:I'm sorry
-ありがとう:Thank you
-ありがとうございます:Thank you very much (polite/formal)
-いってきます:I'm leaving (home)
-いってっらしゃい:+-Safe travel
-ただいま:I'm home
-おかえりなさい:Welcome back
-いただきます:Thank you for the meal (before eating)
-ごちそうさま:Thank you for the meal (after eating)
-はじめまして:Nice to meet you (meeting for first time)
-どうぞよろしく:Please 
-えき:station
-ここ:here
-そこ:there
-うち:house
-いけ:pond
-あせ:sweat
-さか:hill
-しかく:square
-せかい:world
-きそく:regulation
-うそ:lie
-つの:horn
-はし:bridge
-ひ:fire
-へい:wall
-ほし:star
-くに:country
-おかね:money
-はた:flag
-はな:flower
-くも:cloud
-やま:mountain
-ゆき:snow
-よる:night
-さくら:cherry blossom
-はかり:scale
-さる:monkey
-きれ:cloth
-しろ:castle
-かわ:river
-せんす:fan
-きんこ:safe
-かい:shell
-かさ:umbrella
-くし:comb
-え:picture
-いす:chair
-たいこ:drum
-くつ:shoe
-いと:sewing line
-ふえ:flute
-いま:now
-きょう:today
-あした:tomorrow
-きのう:yesterday
-おととい:day before yesterday
-まいにち:every day
-こんしゅう:this week
-せんしゅう:last week
-らいしゅう:next week
-まいしゅう:every week
-せんげつ:last month
-こんげつ:this month
-らいげつ:next month
-まいつき:every month
-きょうねん:last year
-ことし:this year
-らいねん:next year
-まいねん:every year
-にちようび:Sunday
-げつようび:Monday
-かようび:Tuesday
-すいようび:Wednesday
-もくようび:Thursday
-きんようび:Friday
-どようび:Saturday
-いちがつ:January
-にがつ:February
-さんがつ:March
-しがつ:April
-ごがつ:May
-ろくがつ:June
-くがつ:September
-じゅうがつ:October
-じゅういちがつ:November
-じゅうにがつ:December
-あき:fall (Season)
-きせつ:season
-なつ:summer
-ちかてつ:subway
-ふね:ship
-くり:chestnut
-こい:carp
-かた:shoulder
-まり:ball
-もり:woods
-くろ:black
-がか:painter
-めがね:glasses
-ぎんか:silver coin
-かぎ:key
-ぐんじん:army man
-かぐ:furniture
-あたま:head
-うみ:sea
-あめ:rain
-かいもの:shopped goods
-ゆめ:dream
-まくら:pillow
-おつり:change
-こころ:heart
-わたし:I/me
-にわ:garden
-ほんや:bookstore
-げた:japanese sandals
-わなげ:horseshoes (game)
-ごはん:boiled rice
-はいざら:ashtray
-ふじさん:Mount Fuji
-ちず:map
-かぜ:wind
-すいぞくかん:aquarium (building)
-がいこくじん:foreigner
-かがく:chemistry
-ぎんこう:bank
-みが:right
-めぐすり:eye drops
-げんいん:cause
-ひげ:beard/moustache
-かざん:vulcano
-みず:water
-くだもの:fruit
-でんわ:telephone
-まど:window
-かばん:handbag
-えび:shrimp
-しんぶん:newspaper
-かべ:wall
-おぼん:tray/platter
-でんぽ:electric wave
-えんぴつ:pencil
-さんぽ:walk
-ひだり:left
-えだ:branch
-うで:arm
-でんき:electricity
-おどん:dance
-こども:child
-たばこ:cigar
-ゆび:finger
-へび:snake
-ぶんか:culture
-なべ:cooking pot
-ぼいん:vowel
-うた:song
-まめ:bean
-やね:roof
-へや:room
-つくえ:desk
-かみそり:razor
-つき:moon
-つな:rope
-すな:sand
-ちか:underground
-しか:deer
-らっかさん:parachute
-がっき:musical instrument
-せっけん:soap
-けっこん:wedding
-ざっし:magazine
-きって:stamp
-らっぱ:trumpet
-きっぷ:ticket
-ほっぺた:cheek
-いっかい:first floor
-さっか:writer
-にっき:diary
-はっけん:discovery
-けっせき:absence
-わったい:tropical region
-あさって:after tomorrow
-こぎって:check
-しっぱい:mistake
-せいねんがっぴ:birthday (date)
-せんぷうき:fan (electrical appliance)
-ぶうとう:envelope
-とけい:clock
-れいぞうこ:refrigerator
-ひこうき:airplane
-ぼうし:cap
-おおかみ:wolf
-こおり:ice
-えいご:english language
-けいざい:economy
-がくせい:student
-へいわ:peace
-めいし:business card
-くうき:air
-こうつう:transportation
-つうしん:mail
-ぞう:elephant
-ぼうえき:foreign trade
-ぶんぽう:grammar
-おおきい:big
-とおい:located far away
-きゃく:visitor
-ちきゅう:globe
-すいぎゅう:buffalo
-けんびきょう:microscope
-きんぎょ:goldfish
-にんぎょう:doll
-いしゃ:doctor
-じてんしゃ:bicycle
-じんじゃ:shinto sanctuary
-じゅどう:judo
-ほつでんしょ:power plant
-しょうぼうじどうしゃ:firetruck
-きゅうきゅうしゃ:ambulance
-げっきゅう:monthly salary
-べんきょう:study
-ゆうびんきょく:post office
-こうぎょう:industry
-のうぎょう:agriculture
-かいしゃ:company
-うんてんしゃ:driver
-じゅうしょ:address
-びじゅつかん:art museum
-じしょ:dictionary
-しょうがくきん:scholarship
-こうじょう:factory
-こうちゃ:black tea
-かぼちゃ:pumpkin
-ちゅうしゃ:injection
-ちょっかく:square angle
-ちょうちん:paper lantern
-ぎゅうにゅう:cow milk
-ひょうざん:iceberg
-びょういん:hospital
-みゃく:wrist
-りょこう:trip
-りゅう:dragon
-うちゅう:universe
-こうちょう:school principal
-ゆにゅう:import
-びょうき:disease
-みょうじ:last name
-りょうしゅうしょ:receipt
-だいとうりょう:president (of a country)
+うし:cow:animal
+かに:crab:animal
+さかな:fish:animal
+ねこ:cat:animal
+いぬ:dog:animal
+うま:horse:animal
+むし:insect:animal
+あたま:head:body
+て:hand:body
+あし:foot:body
+ゆび:finger:body
+くち:mouth:body
+ほね:bone:body
+みみ:ear:body
+め:eye:body
+あか:red:color
+あお:blue:color
+りんご:apple:nature,cooking
+オレンジ:orange:nature,cooking
+なし:pear:nature,cooking
+カキ:persimmon:nature,cooking
+もも:peach:nature,cooking
+いちご:strawberry:nature,cooking
+バナナ:banana:nature,cooking
+イチジク:fig:nature,cooking
+すいか:watermelon:nature,cooking
+レモン:lemon:nature,cooking
+ミカン:tangerine:nature,cooking
+パイナップル:pineapple:nature,cooking
+ぶどう:grape:nature,cooking
+しお:salt:cooking
+さけ:sake:cooking
+かぞく:family:family
+おじいさん:grandfather:family
+おばあさん:grandmother:family
+おとうさん:father:family
+おかあさん:mother:family
+おじさん:uncle:family
+おばさん:aunt:family
+おねえさん:older sister:family
+おにいさん:older brother:family
+いもうと:younger sister:family
+おとうと:younger brother:family
+いとこ:cousin:family
+むすこ:son:family
+むすめ:daughter:family
+かのじょ:girlfriend:family
+かれし:boyfriend:family
+つま:wife:family
+おっと:husband:family
+おはようございます:Good morning:greetings
+こんいちは:Good afternoon:greetings
+こんばんは:Good evening:greetings
+おやすみ:Good night:greetings
+さようなら:Goodbye:greetings
+すみません:Excuse me:greetings
+ごめんなさい:I'm sorry:greetings
+ありがとう:Thank you:greetings
+ありがとうございます:Thank you very much (polite/formal):greetings
+いってきます:I'm leaving (home):greetings
+いってっらしゃい:Safe travel:greetings
+ただいま:I'm home:greetings
+おかえりなさい:Welcome back:greetings
+いただきます:Thank you for the meal (before eating):greetings
+ごちそうさま:Thank you for the meal (after eating):greetings
+はじめまして:Nice to meet you (meeting for first time):greetings
+どうぞよろしく:Please favor me:greetings
+えき:station:location
+ここ:here:location
+そこ:there:location
+うち:house:location
+いけ:pond:location,nature
+あせ:sweat:body
+さか:hill:location,nature
+しかく:square:science
+せかい:world:location
+きそく:regulation:abstract
+うそ:lie:abstract
+つの:horn:nature
+はし:bridge:location
+ひ:fire:cooking,science:nature
+へい:wall:object
+ほし:star:nature
+くに:country:abstract
+おかね:money:object
+はた:flag:object
+はな:flower:nature
+くも:cloud:nature
+やま:mountain:nature,location
+ゆき:snow:nature
+よる:night:nature
+さくら:cherry blossom:nature
+はかり:scale:object
+さる:monkey:nature
+きれ:cloth:object
+しろ:castle:location
+かわ:river:nature,location
+せんす:fan:object
+きんこ:safe:object
+かい:shell:nature,object
+かさ:umbrella:object
+くし:comb:object
+え:picture:object
+いす:chair:object
+たいこ:drum:object
+くつ:shoe:object
+いと:sewing line:object
+ふえ:flute:object
+いま:now:abstract,time
+きょう:today:abstract,time
+あした:tomorrow:abstract,time
+きのう:yesterday:abstract,time
+おととい:day before yesterday:abstract,time
+まいにち:every day:abstract,time
+こんしゅう:this week:abstract,time
+せんしゅう:last week:abstract,time
+らいしゅう:next week:abstract,time
+まいしゅう:every week:abstract,time
+せんげつ:last month:abstract,time
+こんげつ:this month:abstract,time
+らいげつ:next month:abstract,time
+まいつき:every month:abstract,time
+きょうねん:last year:abstract,time
+ことし:this year:abstract,time
+らいねん:next year:abstract,time
+まいねん:every year:abstract,time
+にちようび:Sunday:abstract,time
+げつようび:Monday:abstract,time
+かようび:Tuesday:abstract,time
+すいようび:Wednesday:abstract,time
+もくようび:Thursday:abstract,time
+きんようび:Friday:abstract,time
+どようび:Saturday:abstract,time
+いちがつ:January:abstract,time
+にがつ:February:abstract,time
+さんがつ:March:abstract,time
+しがつ:April:abstract,time
+ごがつ:May:abstract,time
+ろくがつ:June:abstract,time
+しちがつ:July:abstract,time
+はちがつ:August:abstract,time
+くがつ:September:abstract,time
+じゅうがつ:October:abstract,time
+じゅういちがつ:November:abstract,time
+じゅうにがつ:December:abstract,time
+あき:fall (Season):abstract,time
+きせつ:season:abstract,time
+なつ:summer:abstract,time
+ちかてつ:subway:transportation
+ふね:ship:transportation
+くり:chestnut:nature,cooking
+こい:carp:nature,cooking
+かた:shoulder:body
+まり:ball:object
+もり:woods:nature,location
+くろ:black:color
+がか:painter:profession
+めがね:glasses:object
+ぎんか:silver coin:object
+かぎ:key:object
+ぐんじん:army man:profession
+かぐ:furniture:object
+うみ:sea:nature,location
+あめ:rain:nature
+かいもの:shopped goods:object
+ゆめ:dream:abstract
+まくら:pillow:object
+おつり:change:object
+こころ:heart:body
+わたし:I/me:abstract
+にわ:garden:nature,location
+ほんや:bookstore:location
+げた:japanese sandals:object
+わなげ:horseshoes (game):abstract
+ごはん:boiled rice:cooking
+はいざら:ashtray:object
+ふじさん:Mount Fuji:location,nature
+ちず:map:object
+かぜ:wind:nature
+すいぞくかん:aquarium (building):location
+がいこくじん:foreigner:abstract
+かがく:chemistry:science
+ぎんこう:bank:location
+みが:right:location,abstract
+めぐすり:eye drops:object,science
+げんいん:cause:abstract,science
+ひげ:beard/moustache:body
+かざん:vulcano:nature,location
+みず:water:nature,cooking
+くだもの:fruit:nature,cooking
+でんわ:telephone:object
+まど:window:object
+かばん:handbag:object
+えび:shrimp:nature,cooking
+しんぶん:newspaper:object
+かべ:wall:object
+おぼん:tray/platter:object
+でんぽ:electric wave:science
+えんぴつ:pencil:object
+さんぽ:walk:abstract
+ひだり:left:abstract,location
+えだ:branch:nature
+うで:arm:body
+でんき:electricity:science
+おどん:dance:abstract
+こども:child:abstract
+たばこ:cigar:object
+へび:snake:nature
+ぶんか:culture:abstract
+なべ:cooking pot:object,cooking
+ぼいん:vowel:abstract
+うた:song:abstract
+まめ:bean:nature,cooking
+やね:roof:object,location
+へや:room:location
+つくえ:desk:object
+かみそり:razor:object
+つき:moon:location
+つな:rope:object
+すな:sand:object,nature
+ちか:underground:location
+しか:deer:nature
+らっかさん:parachute:object
+がっき:musical instrument:object
+せっけん:soap:object
+けっこん:wedding:abstract
+ざっし:magazine:object
+きって:stamp:object
+らっぱ:trumpet:object
+きっぷ:ticket:object
+ほっぺた:cheek:body
+いっかい:first floor:location
+さっか:writer:profession
+にっき:diary:object
+はっけん:discovery:abstract
+けっせき:absence:abstract
+わったい:tropical region:location
+あさって:after tomorrow:time,abstract
+こぎって:check:object
+しっぱい:mistake:abstract
+せいねんがっぴ:birthday (date):abstract
+せんぷうき:fan (electrical appliance):object
+ぶうとう:envelope:object
+とけい:clock:object
+れいぞうこ:refrigerator:object
+ひこうき:airplane:transportation
+ぼうし:cap:object
+おおかみ:wolf:nature
+こおり:ice:nature
+えいご:english language:abstract
+けいざい:economy:abstract
+がくせい:student:profession
+へいわ:peace:abstract
+めいし:business card:object
+くうき:air:nature
+こうつう:transportation:abstract,transportation
+つうしん:mail:object,abstract
+ぞう:elephant:nature
+ぼうえき:foreign trade:abstract
+ぶんぽう:grammar:abstract
+おおきい:big:adjective
+とおい:located far away:adjective
+きゃく:visitor:abstract
+ちきゅう:globe:object
+すいぎゅう:buffalo:nature
+けんびきょう:microscope:object,science
+きんぎょ:goldfish:nature
+にんぎょう:doll:object
+いしゃ:doctor:profession
+じてんしゃ:bicycle:object,transportation
+じんじゃ:shinto sanctuary:location
+じゅどう:judo:abstract
+ほつでんしょ:power plant:location
+しょうぼうじどうしゃ:firetruck:transportation
+きゅうきゅうしゃ:ambulance:transportation
+げっきゅう:monthly salary:abstract
+べんきょう:study:abstract
+ゆうびんきょく:post office:location
+こうぎょう:industry:abstract
+のうぎょう:agriculture:abstract
+かいしゃ:company:abstract
+うんてんしゃ:driver:profession
+じゅうしょ:address:location,abstract
+びじゅつかん:art museum:location
+じしょ:dictionary:abstract,object
+しょうがくきん:scholarship:abstract
+こうじょう:factory:location
+こうちゃ:black tea:cooking
+かぼちゃ:pumpkin:cooking,nature
+ちゅうしゃ:injection:abstract,science
+ちょっかく:square angle:science
+ちょうちん:paper lantern:object
+ぎゅうにゅう:cow milk:cooking,nature
+ひょうざん:iceberg:nature
+びょういん:hospital:location
+みゃく:wrist:body
+りょこう:trip:abstract
+りゅう:dragon:nature
+うちゅう:universe:nature
+こうちょう:school principal:profession
+ゆにゅう:import:abstract
+びょうき:disease:abstract,science
+みょうじ:last name:abstract
+りょうしゅうしょ:receipt:object
+だいとうりょう:president (of a country):profession

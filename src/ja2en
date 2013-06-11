@@ -1,3 +1,30 @@
 #!/bin/sh
 
-cat $* | shuf | ja2en.awk
+eval set -- `getopt -n $0 --options c:r -- $@`
+
+while [ $# -ne 0 ]
+do
+	case $1 in
+		-c)
+			CATEGORIES=$2
+			shift 2
+			;;
+
+		-r)
+			shift
+			REVERSE=1
+			;;
+
+		--)
+			shift
+			break;;
+	esac
+done
+
+if [ $# -eq 0 ]
+then
+	printf "No input file names given.\n"
+	exit 1
+fi
+
+cat $* | category_filter.awk -v CATEGORIES=$CATEGORIES | shuf | ja2en.awk
