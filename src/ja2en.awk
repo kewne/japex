@@ -7,5 +7,13 @@ BEGIN { FS = ":"
 
 { print $original
 	getline user_guess < "/dev/stderr"
-	print user_guess " -> " $translated
+	user_guesses[$original] = user_guess
+	answers[$original] = $translated
+}
+
+END { 
+	for (i in user_guesses)
+	{
+		print i " -> " answers[i] ", you answered " user_guesses[i]
+	}
 }
