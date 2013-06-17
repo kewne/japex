@@ -1,10 +1,10 @@
-うし:cow:animal
-かに:crab:animal
-さかな:fish:animal
-ねこ:cat:animal
-いぬ:dog:animal
-うま:horse:animal
-むし:insect:animal
+うし:cow:nature
+かに:crab:nature
+さかな:fish:nature
+ねこ:cat:nature
+いぬ:dog:nature
+うま:horse:nature
+むし:insect:nature
 あたま:head:body
 て:hand:body
 あし:foot:body
