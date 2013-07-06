@@ -1,6 +1,9 @@
 # Japex
 
-This is just a collection of scripts to help me with vocabulary workouts in japanese.
-It is basically extensible to any language though since it is based on key-value structured files.
+Japex is a Haskell application for doing japanese vocabulary exercises.
 
-Someday it may have some real features like a GUI but it will have to wait until I get in the mood to do it.
+It uses a plain-text database with japanese-english expression pairs 
+and supports categories for more focused workouts.
+
+AFAIK it's completely broken on Windows because of a lack of monospace
+        fonts with japanese characters for the command line (please shoot me an email if this is wrong/fixable somehow).
