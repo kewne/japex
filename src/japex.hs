@@ -13,12 +13,30 @@ data Options = Options {
                 
 defaultOptions = Options 10 [] False
 
-main = do
-    seed <- randomIO :: IO (Int)
-    io $ selectExs seed
+commands = [ ("quiz", doQuizz)
+           , ("grade", doGrade)
+           , ("review", doReview)
+           ]
 
-io f = do 
-        args <- getArgs
+main = do
+    args <- getArgs
+    doCommand args
+
+doCommand (command : args) = maybe noCommand ($ args) com
+    where com = lookup command commands
+          noCommand = ioError $ userError  $ "No such command: " ++ command
+
+doCommand [] = argError "No command given"
+        
+doGrade args = ioError $ userError "grading not implemented"
+
+doReview args = ioError $ userError "reviewing not implemented"
+
+doQuizz args = do
+    seed <- randomIO :: IO Int
+    io args $ selectExs seed
+
+io args f = do 
         (ops, dbFile) <- processArgs args
         fileContents <- readFile dbFile
         answerMap <- quiz . f ops . extractExs . lines $ fileContents
@@ -43,15 +61,15 @@ printHelp = putStrLn . usageInfo header $ japexOpts
 argError m = printHelp >> (ioError . userError $ m)
 
 japexOpts = [
-                Option ['c'] ["categories"]
+                Option "c" ["categories"]
                     (ReqArg (\ cs opts -> opts { cats = splitCategories cs })
                         "CATEGORIES")
                     "categories from which to pick exercises"
-            ,   Option ['n'] [""]
+            ,   Option "n" [""]
                     (ReqArg (\ n opts -> opts { lineCount = read n })
                         "NUM")
                     "number of exercises"
-            ,   Option ['h'] ["help"] 
+            ,   Option "h" ["help"] 
                     (NoArg (\ opts -> opts { help = True }))
                      "print this help message"
             ]
@@ -60,8 +78,8 @@ randomize seed size exs = map (exs !!) randomIndexes
     where randomIndexes = take size . randomRs (0, numExs -1) $ mkStdGen seed 
           numExs = length exs
 
-filterByCats cats exs = filter (`hasCats` cats) exs
-    where hasCats (_,_,exCats) cats = (cats \\ exCats) == []
+filterByCats cats = filter (`hasCats` cats)
+    where hasCats (_,_,exCats) cats = null (cats \\ exCats)
 
 extractExs = map splitFields
 
@@ -72,14 +90,14 @@ splitFields l = (jap,eng,cats)
           breakField = break (== ':')
 
 splitCategories cs 
-    | rest == [] = cat:[]
-    | otherwise = (cat : splitCategories (tail rest))
+    | null rest = [cat]
+    | otherwise = cat : splitCategories (tail rest)
     where (cat, rest) = break (== ',') cs
 
 isInCategories (_,_,exCats) cats = (exCats `intersect` cats) == cats
 
-quiz :: [(String, String, a)] -> IO( [(String,String, String)])
-quiz qs = mapM question qs
+quiz :: [(String, String, a)] -> IO [(String,String, String)]
+quiz = mapM question
     where question (q,a,_) = do putStrLn q 
                                 ua <- getLine
                                 return (q,a,ua)
