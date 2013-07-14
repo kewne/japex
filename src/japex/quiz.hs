@@ -87,5 +87,6 @@ quiz = mapM question
     where question (q,a,_) = do putStrLn q 
                                 ua <- getLine
                                 return (q,a,ua)
+
 wAnswers answers h  = mapM_ (wSingleAnswer h) answers
     where wSingleAnswer h (q,a,ua) = hPutStrLn h $ intercalate ":" [q,a,ua]
