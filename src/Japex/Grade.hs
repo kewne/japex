@@ -33,15 +33,15 @@ gradeAnswer (q, ca, a)
         putStrLn "Answer matched correct one exactly, skipping..."
         return (q, a, a)
     | otherwise = do
-                        putStrLn $ "Is " ++ q ++ " = " ++ a ++ " ? (y/n)"
-                        g <- getLine
-                        requestCorrection g q a ca
+        putStrLn $ "Is " ++ q ++ " = '" ++ a ++ "'? [" ++ ca ++"] (Y/n)"
+        g <- getLine
+        requestCorrection g q a ca
 
 requestCorrection g q a ca
     | g == "y" = return (q,a,a)
     | otherwise = do
-                    ca <- correct ca
-                    return (q,a, ca)
+        ca <- correct ca
+        return (q,a, ca)
 
 correct a = do
     putStrLn $ "Please write the correct answer (" ++ a ++ ")"
