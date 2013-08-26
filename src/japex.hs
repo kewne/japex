@@ -12,7 +12,14 @@ import System.Random
 commands = [ ("quiz", doQuiz)
            , ("grade", doGrade)
            , ("review", doReview)
+           , ("help", doHelp)
            ]
+helpMessages = [
+            ("quiz", "Generates a quiz")
+            , ("grade", "Grades a set of quiz results")
+            , ("review", "Reviews grading results")
+            , ("help", "Displays this help message")
+            ]
 
 main = do
     args <- getArgs
@@ -24,3 +31,5 @@ doCommand (command : args) = maybe noCommand ($ args) com
 
 doCommand [] = ioError $ userError "No command given"
 
+doHelp args = putStrLn . unlines . map printCom $ helpMessages
+    where printCom (name, desc) = name ++ "\t" ++ desc
