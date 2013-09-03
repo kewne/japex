@@ -1,10 +1,13 @@
 module Japex.Grade
     (
-        doGrade
+        gradeCommand
     ) where
 
 import System.IO
 import Data.List
+import Japex.Common
+
+gradeCommand = Command doGrade (putStrLn "grade")
 
 doGrade args = do
             resFile <- parseArgs args

@@ -1,8 +1,11 @@
 module Japex.Review
-    (doReview)
+    (reviewCommand)
 where
 
 import System.IO
+import Japex.Common
+
+reviewCommand = Command doReview (putStrLn "review")
 
 doReview args = do
     resFile <- parseArgs args
