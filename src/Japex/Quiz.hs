@@ -3,11 +3,19 @@ module Japex.Quiz (
     ) where
 
 import Data.List
-import Japex.Common(Command(Command))
+import Data.Time.Clock
+import Data.Time.Format
+import Japex.Common
+    (
+        Command(Command)
+        , getJapexUserDataSubDir
+    )
 import System.Console.GetOpt
-import System.Environment
+import System.Environment(getProgName)
 import System.Exit
+import System.FilePath
 import System.IO
+import System.Locale
 import System.Random
 
 data Options = Options {
@@ -24,14 +32,20 @@ doQuiz args = do
     seed <- randomIO :: IO Int
     io args $ selectExs seed
 
+selectExs randomSeed opts exs = randomize randomSeed (lineCount opts) . 
+                                    filterByCats (cats opts) $ exs
+
 io args f = do 
         ops <- processArgs args
         fileContents <- readFile . dbFile $ ops
         answerMap <- quiz . f ops . extractExs . lines $ fileContents
-        withFile "results.txt" WriteMode $ wAnswers answerMap
+        resultFileName <- generateResultFileName
+        withFile resultFileName WriteMode $ wAnswers answerMap
 
-selectExs randomSeed opts exs = randomize randomSeed (lineCount opts) . 
-                                    filterByCats (cats opts) $ exs
+generateResultFileName = do
+    quizSubDir <- getJapexUserDataSubDir "quiz"
+    now <- getCurrentTime
+    return $ joinPath [quizSubDir, formatTime defaultTimeLocale "%s" now]
 
 argError m = printHelp >> (ioError . userError $ m)
 
