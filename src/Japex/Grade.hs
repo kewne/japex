@@ -3,23 +3,50 @@ module Japex.Grade
         gradeCommand
     ) where
 
+import Control.Monad
+import System.Directory
+import System.FilePath
 import System.IO
 import Data.List
 import Japex.Common
 
+data Options = Options {
+    resultFile :: FilePath
+    }
+
 gradeCommand = Command doGrade (putStrLn "grade")
 
+defaultOptions = Options "dummy"
+
 doGrade args = do
-            resFile <- parseArgs args
-            results <- readFile resFile
-            stats <- grade . parseResults $ results
-            writeFile "grades.txt" $ format stats
+    opts <- parseArgs args defaultOptions
+    results <- readFile . resultFile $ opts
+    stats <- grade . parseResults $ results
+    gradeFileName <- generateGradeFileName . takeFileName . resultFile $ opts
+    writeFile gradeFileName $ format stats
+    removeFile . resultFile $ opts
+
+parseArgs as defs = do
+    resultFiles <- findResultFiles
+    let opts = defs { resultFile = selectResultFile resultFiles }
+    putStrLn . resultFile $ opts
+    return opts
+
+selectResultFile = minimum
+
+findResultFiles = do
+    quizSubDir <- getJapexUserDataSubDir "quiz"
+    quizSubDirContents <- getDirectoryContents quizSubDir
+    let resultFiles = map (joinPath . ([quizSubDir] ++) . (:[])) . filter (`notElem` [".", ".."]) $ quizSubDirContents
+    when (null resultFiles) $ fail "No result files found"
+    return resultFiles
+    
+generateGradeFileName resultFileName = do
+    gradeSubDir <- getJapexUserDataSubDir "grade"
+    return $ joinPath [ gradeSubDir, resultFileName ]
 
 format = unlines . map (intercalate ":" . tupleToArray)
     where tupleToArray (a,b,c) = [a,b,c]
-
-parseArgs [] = ioError $ userError "No results file given"
-parseArgs as = return $ head as
 
 parseResults ls = map extractFields $ lines ls
 
@@ -41,7 +68,7 @@ gradeAnswer (q, ca, a)
         requestCorrection g q a ca
 
 requestCorrection g q a ca
-    | g == "y" = return (q,a,a)
+    | g == "y" || g == "" = return (q,a,a)
     | otherwise = do
         ca <- correct ca
         return (q,a, ca)
