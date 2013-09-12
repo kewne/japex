@@ -18,39 +18,27 @@ import System.IO
 import System.Locale
 import System.Random
 
-data Options = Options {
-                  lineCount :: Int
-                , cats :: [String]
-                , dbFile :: FilePath
-                }
-
-quizCommand = Command doQuiz printHelp
+quizCommand = Command doQuiz (putStrLn helpMessage)
                 
-defaultOptions = Options 10 [] "/usr/share/japex/japex.db"
-
 doQuiz args = do
     seed <- randomIO :: IO Int
-    io args $ selectExs seed
+    quizExercises args $ selectExs seed
 
-selectExs randomSeed opts exs = randomize randomSeed (lineCount opts) . 
-                                    filterByCats (cats opts) $ exs
+selectExs randomSeed opts = randomize randomSeed (lineCount opts) . 
+                                    filterByCats (cats opts)
 
-io args f = do 
-        ops <- processArgs args
-        fileContents <- readFile . dbFile $ ops
-        answerMap <- quiz . f ops . extractExs . lines $ fileContents
-        resultFileName <- generateResultFileName
-        withFile resultFileName WriteMode $ wAnswers answerMap
+randomize seed size exs = map (exs !!) randomIndexes
+    where randomIndexes = take size . randomRs (0, numExs -1) $ mkStdGen seed 
+          numExs = length exs
 
-generateResultFileName = do
-    quizSubDir <- getJapexUserDataSubDir "quiz"
-    now <- getCurrentTime
-    return $ joinPath [quizSubDir, formatTime defaultTimeLocale "%s" now]
+filterByCats cats = filter (null . (cats \\ ) . \ (_,_,c) -> c)
 
-argError m = printHelp >> (ioError . userError $ m)
-
-printHelp = putStrLn . usageInfo header $ japexOpts
-          where header = "Usage: japex quiz [OPTIONS]"
+quizExercises args f = do 
+    ops <- processArgs args
+    fileContents <- readFile . dbFile $ ops
+    answerMap <- quiz . f ops . extractExs . lines $ fileContents
+    resultFileName <- generateResultFileName
+    writeFile resultFileName (toAnswerString answerMap)
         
 processArgs args
     | e /= [] = argError . init . concat $ e
@@ -75,12 +63,24 @@ japexOpts = [
             "database file to use"
      ]
 
-randomize seed size exs = map (exs !!) randomIndexes
-    where randomIndexes = take size . randomRs (0, numExs -1) $ mkStdGen seed 
-          numExs = length exs
+argError m = putStrLn helpMessage >> (ioError . userError $ m)
 
-filterByCats cats = filter (`hasCats` cats)
-    where hasCats (_,_,exCats) cats = null (cats \\ exCats)
+helpMessage = usageInfo "Usage: japex quiz [OPTIONS]" japexOpts
+
+defaultOptions = Options 10 [] "/usr/share/japex/japex.db"
+
+data Options = Options {
+                  lineCount :: Int
+                , cats :: [String]
+                , dbFile :: FilePath
+                }
+
+generateResultFileName = do
+    quizSubDir <- getUserQuizDir
+    now <- getCurrentTime
+    return $ joinPath [quizSubDir, formatTime defaultTimeLocale "%s" now]
+
+getUserQuizDir = getJapexUserDataSubDir "quiz"
 
 extractExs = map splitFields
 
@@ -95,13 +95,10 @@ splitCategories cs
     | otherwise = cat : splitCategories (tail rest)
     where (cat, rest) = break (== ',') cs
 
-isInCategories (_,_,exCats) cats = (exCats `intersect` cats) == cats
+quiz = mapM (\ (q,a,cats) -> do
+                    putStrLn q 
+                    ua <- getLine
+                    return (q,a,ua)
+            )
 
-quiz :: [(String, String, a)] -> IO [(String,String, String)]
-quiz = mapM question
-    where question (q,a,_) = do putStrLn q 
-                                ua <- getLine
-                                return (q,a,ua)
-
-wAnswers answers h  = mapM_ (wSingleAnswer h) answers
-    where wSingleAnswer h (q,a,ua) = hPutStrLn h $ intercalate ":" [q,a,ua]
+toAnswerString = unlines . map (\ (q,a,ua) -> intercalate ":" [q,a,ua])
