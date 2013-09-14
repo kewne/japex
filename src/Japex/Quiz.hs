@@ -3,6 +3,7 @@ module Japex.Quiz (
     ) where
 
 import Data.List
+import qualified Data.Text as T
 import Japex.Common
     (
         Command(..)
@@ -33,7 +34,7 @@ shuffle :: Int -> [QuizEntry] -> [QuizEntry]
 shuffle seed exs = map (exs !!) $ randomRs range $ mkStdGen seed
     where range = (0, length exs -1)
 
-filterByCats :: [String] -> [QuizEntry] -> [QuizEntry]
+filterByCats :: [T.Text] -> [QuizEntry] -> [QuizEntry]
 filterByCats cats = filter (null . (cats \\ ) . categories)
         
 processArgs args seed
@@ -46,7 +47,7 @@ processArgs args seed
 
 japexOpts = [
     Option "c" ["categories"]
-        (ReqArg (\ cs opts -> opts { cats = splitCategories cs })
+        (ReqArg (\ cs opts -> opts { cats = splitCategories . T.pack $ cs })
          "CATEGORIES")
             "categories from which to pick exercises"
     , Option "n" [""]
@@ -71,14 +72,14 @@ defaultOptions = Options 10 [] "/usr/share/japex/japex.db"
 
 data Options = Options {
                   lineCount :: Int
-                , cats :: [String]
+                , cats :: [T.Text]
                 , dbFile :: FilePath
                 , seed :: Int
                 }
 
-quiz :: [QuizEntry] -> IO [(String, String, String)]
+quiz :: [QuizEntry] -> IO [(T.Text, T.Text, T.Text)]
 quiz = mapM (\ (Quiz japanese english _) -> do
-                    putStrLn japanese
+                    putStrLn . T.unpack $ japanese
                     ua <- getLine
-                    return (japanese, english, ua)
+                    return (japanese, english, T.pack ua)
             )

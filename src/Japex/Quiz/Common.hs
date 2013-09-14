@@ -1,17 +1,22 @@
 module Japex.Quiz.Common
     (
         QuizEntry(..)
+        , AnswerEntry(..)
         , splitCategories
     ) where
 
+import qualified Data.Text as T
+
 data QuizEntry = Quiz {
-    japanese :: String
-    , english :: String
-    , categories :: [String]
+    japanese :: T.Text
+    , english :: T.Text
+    , categories :: [T.Text]
 }
 
-splitCategories cs 
-    | null rest = [cat]
-    | otherwise = cat : splitCategories (tail rest)
-    where (cat, rest) = break (== ',') cs
+data AnswerEntry = Answer {
+    question :: T.Text
+    , userAnswer :: T.Text
+    , correctAnswer :: T.Text
+}
 
+splitCategories = T.split (==',')

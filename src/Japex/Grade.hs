@@ -4,75 +4,52 @@ module Japex.Grade
     ) where
 
 import Control.Monad
-import System.Directory
-import System.FilePath
 import System.IO
 import Data.List
+import qualified Data.Text as T
+import qualified Data.Text.IO as TIo
 import Japex.Common
+import Japex.Grade.File
+import Japex.Quiz.Common
+import Japex.Quiz.File(getUserQuizDir)
+
+gradeCommand = Command doGrade (putStrLn "grade")
 
 data Options = Options {
     resultFile :: FilePath
     }
 
-gradeCommand = Command doGrade (putStrLn "grade")
-
 defaultOptions = Options "dummy"
 
 doGrade args = do
-    opts <- parseArgs args defaultOptions
-    results <- readFile . resultFile $ opts
-    stats <- grade . parseResults $ results
-    gradeFileName <- generateGradeFileName . takeFileName . resultFile $ opts
-    writeFile gradeFileName $ format stats
-    removeFile . resultFile $ opts
+    opts <- parseArgs args
+    transformResultsFile (resultFile opts) grade
 
-parseArgs as defs = do
+parseArgs as = do
     resultFiles <- findResultFiles
-    let opts = defs { resultFile = selectResultFile resultFiles }
+    let opts = defaultOptions { resultFile = selectResultFile resultFiles }
     putStrLn . resultFile $ opts
     return opts
 
 selectResultFile = minimum
 
-findResultFiles = do
-    quizSubDir <- getJapexUserDataSubDir "quiz"
-    quizSubDirContents <- getDirectoryContents quizSubDir
-    let resultFiles = map (joinPath . ([quizSubDir] ++) . (:[])) . filter (`notElem` [".", ".."]) $ quizSubDirContents
-    when (null resultFiles) $ fail "No result files found"
-    return resultFiles
-    
-generateGradeFileName resultFileName = do
-    gradeSubDir <- getJapexUserDataSubDir "grade"
-    return $ joinPath [ gradeSubDir, resultFileName ]
-
-format = unlines . map (intercalate ":" . tupleToArray)
-    where tupleToArray (a,b,c) = [a,b,c]
-
-parseResults ls = map extractFields $ lines ls
-
-extractFields l = (q,ca,a)
-    where (q,as) = breakField l
-          (ca,a') = breakField $ tail as
-          a = tail a'
-          breakField = break (== ':')
-
 grade = mapM gradeAnswer
 
-gradeAnswer (q, ca, a) 
+gradeAnswer (Answer q ca a)
     | ca == a = do
         putStrLn "Answer matched correct one exactly, skipping..."
         return (q, a, a)
     | otherwise = do
-        putStrLn $ "Is " ++ q ++ " = '" ++ a ++ "'? [" ++ ca ++"] (Y/n)"
-        g <- getLine
+        TIo.putStrLn . T.concat $ [T.pack "Is ", q, T.pack " = '", a, T.pack "'? [", ca, T.pack"] (Y/n)"]
+        g <- TIo.getLine
         requestCorrection g q a ca
 
 requestCorrection g q a ca
-    | g == "y" || g == "" = return (q,a,a)
+    | g == T.singleton 'y' || T.null g = return (q,a,a)
     | otherwise = do
         ca <- correct ca
         return (q,a, ca)
 
 correct a = do
-    putStrLn $ "Please write the correct answer (" ++ a ++ ")"
-    getLine
+    TIo.putStrLn . T.concat $ [T.pack "Please write the correct answer (", a, T.pack ")"]
+    TIo.getLine
