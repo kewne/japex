@@ -3,51 +3,47 @@ module Japex.Quiz (
     ) where
 
 import Data.List
-import Data.Time.Clock
-import Data.Time.Format
 import Japex.Common
     (
-        Command(Command)
+        Command(..)
         , getJapexUserDataSubDir
     )
+import Japex.Quiz.Common
+import Japex.Quiz.File
 import System.Console.GetOpt
 import System.Environment(getProgName)
 import System.Exit
-import System.FilePath
 import System.IO
-import System.Locale
 import System.Random
 
 quizCommand = Command doQuiz (putStrLn helpMessage)
-                
+
+doQuiz :: [String] -> IO ()
 doQuiz args = do
     seed <- randomIO :: IO Int
-    quizExercises args $ selectExs seed
+    ops <- processArgs args seed
+    exercises <- extractExercises . dbFile $ ops
+    answers <- quiz . selectExs ops $ exercises
+    writeAnswerFile answers
 
-selectExs randomSeed opts = randomize randomSeed (lineCount opts) . 
-                                    filterByCats (cats opts)
+selectExs :: Options -> [QuizEntry] -> [QuizEntry]
+selectExs (Options lineCount cats _ seed) = take lineCount . shuffle seed . filterByCats cats
 
-randomize seed size exs = map (exs !!) randomIndexes
-    where randomIndexes = take size . randomRs (0, numExs -1) $ mkStdGen seed 
-          numExs = length exs
+shuffle :: Int -> [QuizEntry] -> [QuizEntry]
+shuffle seed exs = map (exs !!) $ randomRs range $ mkStdGen seed
+    where range = (0, length exs -1)
 
-filterByCats cats = filter (null . (cats \\ ) . \ (_,_,c) -> c)
-
-quizExercises args f = do 
-    ops <- processArgs args
-    fileContents <- readFile . dbFile $ ops
-    answerMap <- quiz . f ops . extractExs . lines $ fileContents
-    resultFileName <- generateResultFileName
-    writeFile resultFileName (toAnswerString answerMap)
+filterByCats :: [String] -> [QuizEntry] -> [QuizEntry]
+filterByCats cats = filter (null . (cats \\ ) . categories)
         
-processArgs args
+processArgs args seed
     | e /= [] = argError . init . concat $ e
     | length a > 1 = argError "Too many arguments for quiz"
     | otherwise = return o
     where (userOs, a, e) = getOpt Permute japexOpts args
-          o = overrideDefault defaultOptions userOs
+          o = overrideDefault (defaultOptions seed) userOs
           overrideDefault = foldl (flip id) 
-    
+
 japexOpts = [
     Option "c" ["categories"]
         (ReqArg (\ cs opts -> opts { cats = splitCategories cs })
@@ -61,6 +57,10 @@ japexOpts = [
             (ReqArg (\ file opts -> opts { dbFile = file })
              "DB_FILE")
             "database file to use"
+     , Option "s" ["seed"]
+            (ReqArg (\ userSeed opts -> opts { seed = read userSeed })
+                "SEED")
+            "random seed to use"
      ]
 
 argError m = putStrLn helpMessage >> (ioError . userError $ m)
@@ -73,32 +73,12 @@ data Options = Options {
                   lineCount :: Int
                 , cats :: [String]
                 , dbFile :: FilePath
+                , seed :: Int
                 }
 
-generateResultFileName = do
-    quizSubDir <- getUserQuizDir
-    now <- getCurrentTime
-    return $ joinPath [quizSubDir, formatTime defaultTimeLocale "%s" now]
-
-getUserQuizDir = getJapexUserDataSubDir "quiz"
-
-extractExs = map splitFields
-
-splitFields l = (jap,eng,cats)
-    where (jap, engAndCats) = breakField l
-          (eng, unsplitCats) = breakField . tail $ engAndCats
-          cats = splitCategories . tail $ unsplitCats
-          breakField = break (== ':')
-
-splitCategories cs 
-    | null rest = [cat]
-    | otherwise = cat : splitCategories (tail rest)
-    where (cat, rest) = break (== ',') cs
-
-quiz = mapM (\ (q,a,cats) -> do
-                    putStrLn q 
+quiz :: [QuizEntry] -> IO [(String, String, String)]
+quiz = mapM (\ (Quiz japanese english _) -> do
+                    putStrLn japanese
                     ua <- getLine
-                    return (q,a,ua)
+                    return (japanese, english, ua)
             )
-
-toAnswerString = unlines . map (\ (q,a,ua) -> intercalate ":" [q,a,ua])
