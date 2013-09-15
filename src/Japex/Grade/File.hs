@@ -1,6 +1,7 @@
 module Japex.Grade.File
     (
         generateGradeFileName
+        , getUserGradeSubDir
         , writeGradeFile
         , findResultFiles
         , transformResultsFile

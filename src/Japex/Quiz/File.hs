@@ -13,12 +13,7 @@ import qualified Data.Text.IO as TIo
 import Data.Time.Clock
 import Data.Time.Format
 import Japex.Common
-import Japex.Quiz.Common
-    (
-        QuizEntry(Quiz)
-        , AnswerEntry(Answer)
-        , splitCategories
-    )
+import Japex.Quiz.Common (splitCategories)
 import System.FilePath
 import System.Locale
 

@@ -27,9 +27,7 @@ doGrade args = do
 
 parseArgs as = do
     resultFiles <- findResultFiles
-    let opts = defaultOptions { resultFile = selectResultFile resultFiles }
-    putStrLn . resultFile $ opts
-    return opts
+    return $ defaultOptions { resultFile = selectResultFile resultFiles }
 
 selectResultFile = minimum
 

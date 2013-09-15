@@ -6,10 +6,6 @@ import Data.List
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIo
 import Japex.Common
-    (
-        Command(..)
-        , getJapexUserDataSubDir
-    )
 import Japex.Quiz.Common
 import Japex.Quiz.File
 import System.Console.GetOpt
