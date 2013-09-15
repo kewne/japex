@@ -4,7 +4,6 @@ module Japex.Grade
     ) where
 
 import Control.Monad
-import System.IO
 import Data.List
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIo
@@ -12,6 +11,8 @@ import Japex.Common
 import Japex.Grade.File
 import Japex.Quiz.Common
 import Japex.Quiz.File(getUserQuizDir)
+import System.FilePath
+import System.IO
 
 gradeCommand = Command doGrade (putStrLn "grade")
 
@@ -22,32 +23,32 @@ data Options = Options {
 defaultOptions = Options "dummy"
 
 doGrade args = do
-    opts <- parseArgs args
-    transformResultsFile (resultFile opts) grade
-
-parseArgs as = do
-    resultFiles <- findResultFiles
-    return $ defaultOptions { resultFile = selectResultFile resultFiles }
+    resultFile <- liftM selectResultFile findResultFiles
+    userGradeDir <- getUserGradeSubDir
+    interactiveTransformFile ((userGradeDir </>) . takeFileName) (liftM format . grade . parseResults) resultFile
 
 selectResultFile = minimum
 
-grade = mapM gradeAnswer
+format :: [CorrectedEntry] -> T.Text
+format = T.unlines . map formatCorrected
 
-gradeAnswer (Answer q ca a)
-    | ca == a = do
+parseResults :: T.Text -> [AnswerEntry]
+parseResults = map (toAnswer . T.split (==':')) . T.lines
+    where toAnswer [a,b,c] = Answer a b c
+
+grade :: [AnswerEntry] -> IO [CorrectedEntry]
+grade = mapM gradeAnswer 
+
+gradeAnswer :: AnswerEntry -> IO CorrectedEntry
+gradeAnswer a
+    | isExactMatch a = do
         putStrLn "Answer matched correct one exactly, skipping..."
-        return (q, a, a)
-    | otherwise = do
-        TIo.putStrLn . T.concat $ [T.pack "Is ", q, T.pack " = '", a, T.pack "'? [", ca, T.pack"] (Y/n)"]
+        return $ Correct True a
+    | otherwise = confirmIncorrect a
+
+isExactMatch (Answer q a ca) = a == ca
+
+confirmIncorrect a = do
+        TIo.putStrLn . T.concat $ [T.pack "Is ", question a, T.pack " = '", userAnswer a, T.pack "'? [", correctAnswer a, T.pack"] (Y/n)"]
         g <- TIo.getLine
-        requestCorrection g q a ca
-
-requestCorrection g q a ca
-    | g == T.singleton 'y' || T.null g = return (q,a,a)
-    | otherwise = do
-        ca <- correct ca
-        return (q,a, ca)
-
-correct a = do
-    TIo.putStrLn . T.concat $ [T.pack "Please write the correct answer (", a, T.pack ")"]
-    TIo.getLine
+        return $ Correct (g == T.singleton 'y' || T.null g) a

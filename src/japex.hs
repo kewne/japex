@@ -2,7 +2,6 @@ import Data.List
 import Japex.Common
 import Japex.Grade
 import Japex.Quiz
-import Japex.Review
 import Japex.Help
 import System.Environment(getArgs)
 import System.Exit
@@ -11,7 +10,6 @@ import System.IO
 
 commands = [ ("quiz", quizCommand)
            , ("grade", gradeCommand)
-           , ("review", reviewCommand)
            , ("help", helpCommand commands)
            ]
 

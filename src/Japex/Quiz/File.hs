@@ -35,4 +35,4 @@ generateResultFileName = do
     liftM ((quizSubDir </>) . formatTime defaultTimeLocale "%s") getCurrentTime
 
 toAnswerString :: [AnswerEntry] -> T.Text
-toAnswerString = T.unlines . map (\ (Answer q a ua) -> T.intercalate (T.singleton ':') [q,a,ua])
+toAnswerString = T.unlines . map (\ (Answer q a ua) -> T.intercalate (T.singleton ':') [q,ua,a])
