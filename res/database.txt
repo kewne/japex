@@ -78,7 +78,7 @@
 うそ:lie:abstract
 つの:horn:nature
 はし:bridge:location
-ひ:fire:cooking,science:nature
+ひ:fire:cooking,science,nature
 へい:wall:object
 ほし:star:nature
 くに:country:abstract
