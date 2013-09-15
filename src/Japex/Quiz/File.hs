@@ -1,11 +1,12 @@
 module Japex.Quiz.File
     (
-        extractExercises
+        readQuizDatabaseFile
         , generateResultFileName
         , writeAnswerFile
         , getUserQuizDir
     ) where
 
+import Control.Monad
 import Data.List
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIo
@@ -15,29 +16,28 @@ import Japex.Common
 import Japex.Quiz.Common
     (
         QuizEntry(Quiz)
+        , AnswerEntry(Answer)
         , splitCategories
     )
 import System.FilePath
 import System.Locale
 
-extractExercises :: FilePath -> IO [QuizEntry]
-extractExercises f = do
-    fileContents <- TIo.readFile f
-    return . map splitFields . T.lines $ fileContents
+readQuizDatabaseFile :: FilePath -> IO [QuizEntry]
+readQuizDatabaseFile = liftM extractExercises . TIo.readFile
 
-splitFields l = Quiz jap eng cats
-    where [jap, eng, unsplitCats] = take 3 . T.split (==':') $ l
-          cats = splitCategories unsplitCats
-
-generateResultFileName = do
-    quizSubDir <- getUserQuizDir
-    now <- getCurrentTime
-    return $ joinPath [quizSubDir, formatTime defaultTimeLocale "%s" now]
+extractExercises :: T.Text -> [QuizEntry]
+extractExercises = map splitFields . T.lines
+    where splitFields = toQuiz . T.split (==':')
+          toQuiz [a,b,c] = Quiz a b (splitCategories c)
 
 getUserQuizDir = getJapexUserDataSubDir "quiz"
 
-toAnswerString = T.unlines . map (\ (q,a,ua) -> T.intercalate (T.singleton ':') [q,a,ua])
+writeAnswerFile :: [AnswerEntry] -> IO ()
+writeAnswerFile answers = (`TIo.writeFile` toAnswerString answers) =<< generateResultFileName
 
-writeAnswerFile answers = do
-    resultFileName <- generateResultFileName
-    TIo.writeFile resultFileName (toAnswerString answers)
+generateResultFileName = do
+    quizSubDir <- getUserQuizDir
+    liftM ((quizSubDir </>) . formatTime defaultTimeLocale "%s") getCurrentTime
+
+toAnswerString :: [AnswerEntry] -> T.Text
+toAnswerString = T.unlines . map (\ (Answer q a ua) -> T.intercalate (T.singleton ':') [q,a,ua])

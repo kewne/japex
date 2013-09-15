@@ -16,9 +16,7 @@ import Japex.Quiz.File(getUserQuizDir)
 import System.Directory
 import System.FilePath
 
-generateGradeFileName resultFileName = do
-    gradeSubDir <- getUserGradeSubDir
-    return $ joinPath [ gradeSubDir, resultFileName ]
+generateGradeFileName resultFileName = liftM (</> resultFileName) getUserGradeSubDir
 
 getUserGradeSubDir = getJapexUserDataSubDir "grade"
 
@@ -32,7 +30,7 @@ format = T.unlines . map (T.intercalate (T.singleton ':') . reviewToLine)
 findResultFiles = do
     quizSubDir <- getUserQuizDir
     quizSubDirContents <- getDirectoryContents quizSubDir
-    let resultFiles = map (joinPath . ([quizSubDir] ++) . (:[])) . filter (`notElem` [".", ".."]) $ quizSubDirContents
+    let resultFiles = map (quizSubDir </>) . filter (`notElem` [".", ".."]) $ quizSubDirContents
     when (null resultFiles) $ fail "No result files found"
     return resultFiles
     

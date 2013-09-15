@@ -4,6 +4,7 @@ module Japex.Quiz (
 
 import Data.List
 import qualified Data.Text as T
+import qualified Data.Text.IO as TIo
 import Japex.Common
     (
         Command(..)
@@ -21,10 +22,9 @@ quizCommand = Command doQuiz (putStrLn helpMessage)
 
 doQuiz :: [String] -> IO ()
 doQuiz args = do
-    seed <- randomIO :: IO Int
-    ops <- processArgs args seed
-    exercises <- extractExercises . dbFile $ ops
-    answers <- quiz . selectExs ops $ exercises
+    ops <- processArgs args =<< randomIO
+    questions <- readQuizDatabaseFile . dbFile $ ops
+    answers <- quiz . selectExs ops $ questions
     writeAnswerFile answers
 
 selectExs :: Options -> [QuizEntry] -> [QuizEntry]
@@ -38,8 +38,8 @@ filterByCats :: [T.Text] -> [QuizEntry] -> [QuizEntry]
 filterByCats cats = filter (null . (cats \\ ) . categories)
         
 processArgs args seed
-    | e /= [] = argError . init . concat $ e
-    | length a > 1 = argError "Too many arguments for quiz"
+    | not . null $ e = argError . init . concat $ e
+    | not . null $ a = argError "Too many arguments for quiz"
     | otherwise = return o
     where (userOs, a, e) = getOpt Permute japexOpts args
           o = overrideDefault (defaultOptions seed) userOs
@@ -77,9 +77,9 @@ data Options = Options {
                 , seed :: Int
                 }
 
-quiz :: [QuizEntry] -> IO [(T.Text, T.Text, T.Text)]
+quiz :: [QuizEntry] -> IO [AnswerEntry]
 quiz = mapM (\ (Quiz japanese english _) -> do
                     putStrLn . T.unpack $ japanese
                     ua <- getLine
-                    return (japanese, english, T.pack ua)
+                    return . Answer japanese english $ T.pack ua
             )
