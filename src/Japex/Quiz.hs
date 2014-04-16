@@ -3,22 +3,25 @@ module Japex.Quiz (
     ) where
 
 import Data.List
-import qualified Data.Text as T
-import qualified Data.Text.IO as TIo
 import Japex.Common
 import Japex.Quiz.Common
 import Japex.Quiz.File
+import Paths_japex
 import System.Console.GetOpt
 import System.Environment(getProgName)
 import System.Exit
 import System.IO
 import System.Random
+import qualified Data.Text as T
+import qualified Data.Text.IO as TIo
 
 quizCommand = Command doQuiz (putStrLn helpMessage)
 
 doQuiz :: [String] -> IO ()
 doQuiz args = do
-    ops <- processArgs args =<< randomIO
+    seed <- randomIO
+    defaultDatabase <- getDataFileName "database.txt"
+    ops <- processArgs args defaultDatabase seed
     questions <- readQuizDatabaseFile . dbFile $ ops
     answers <- quiz . selectExs ops $ questions
     writeAnswerFile answers
@@ -33,12 +36,12 @@ shuffle seed exs = map (exs !!) $ randomRs range $ mkStdGen seed
 filterByCats :: [T.Text] -> [QuizEntry] -> [QuizEntry]
 filterByCats cats = filter (null . (cats \\ ) . categories)
         
-processArgs args seed
+processArgs args database seed
     | not . null $ e = argError . init . concat $ e
     | not . null $ a = argError "Too many arguments for quiz"
     | otherwise = return o
     where (userOs, a, e) = getOpt Permute japexOpts args
-          o = overrideDefault (defaultOptions seed) userOs
+          o = overrideDefault (defaultOptions database seed) userOs
           overrideDefault = foldl (flip id) 
 
 japexOpts = [
@@ -64,7 +67,7 @@ argError m = putStrLn helpMessage >> (ioError . userError $ m)
 
 helpMessage = usageInfo "Usage: japex quiz [OPTIONS]" japexOpts
 
-defaultOptions = Options 10 [] "/usr/share/japex/japex.db"
+defaultOptions = Options 10 []
 
 data Options = Options {
                   lineCount :: Int

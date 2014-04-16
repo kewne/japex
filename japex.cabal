@@ -3,7 +3,7 @@
 
 name:                japex
 version:             0.1.0.0
-synopsis:            Japanese vocabulary exercises
+synopsis:            Japanese exercises
 -- description:         
 homepage:            http://github.com/kewne/japex
 license:             GPL-3
@@ -14,10 +14,15 @@ maintainer:          joao.r.cabrita@gmail.com
 -- category:            
 build-type:          Simple
 cabal-version:       >=1.8
+data-files:        database.txt
+data-dir:          res
 
 executable japex
   main-is:           japex.hs
-  other-modules:     Japex.Quiz, Japex.Grade, Japex.Common
+  other-modules:     Japex.Quiz
+                     , Japex.Grade
+                     , Japex.Common
+                     , Paths_japex
   build-depends:     base == 4.*,
                      random == 1.0.*,
                      directory == 1.2.*,

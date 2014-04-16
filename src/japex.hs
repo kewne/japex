@@ -3,21 +3,24 @@ import Japex.Common
 import Japex.Grade
 import Japex.Quiz
 import Japex.Help
+import Japex.Numbers
 import System.Environment(getArgs)
 import System.Exit
 import System.IO
 
 
-commands = [ ("quiz", quizCommand)
-           , ("grade", gradeCommand)
+commands = [ ("vocabulary", quizCommand)
            , ("help", helpCommand commands)
+           , ("numbers", numbersCommand)
            ]
 
 main = do
     args <- getArgs
     doCommand args
 
-doCommand [] = ioError $ userError "No command given"
+doCommand [] = do
+    commandFunc (helpCommand commands) []
+    ioError $ userError "No command given"
 doCommand (command : args) = maybe noCommand (executeCommand args) com
     where com = lookup command commands
           noCommand = ioError $ userError  $ "No such command: " ++ command

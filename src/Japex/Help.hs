@@ -3,13 +3,13 @@ module Japex.Help
 where
 
 import Japex.Common
+import Paths_japex
 
 helpCommand commands = Command (doHelp commands) printHelp
 
 helpMessages = [
-            ("quiz", "Generates a quiz")
-            , ("grade", "Grades a set of quiz results")
-            , ("review", "Reviews grading results")
+            ("vocabulary", "Generates a quiz")
+            , ("numbers", "Generates number sequences to spell out")
             , ("help", "Displays this help message")
             ]
 
@@ -18,4 +18,10 @@ doHelp commands [comm] = maybe noCommand helpFunc $ lookup comm commands
 doHelp commands [] = putStrLn . unlines . map printCom $ helpMessages
     where printCom (name, desc) = name ++ "\t" ++ desc
 
-printHelp = putStrLn "help"
+printHelp = putStrLn $ unlines [
+    "Lists available commands"
+    , "\tjapex help"
+    , ""
+    , "Prints help about a command"
+    , "\tjapex help COMMAND"
+    ]
