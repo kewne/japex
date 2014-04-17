@@ -1,6 +1,7 @@
 module Japex.Common
     (
-        Command(Command, commandFunc, helpFunc)
+				JapexCommand(..)
+				, findByName
         , QuizEntry(..)
         , AnswerEntry(..)
         , CorrectedEntry(..)
@@ -12,14 +13,20 @@ module Japex.Common
 
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIo
+import Data.List
 import System.FilePath
 import System.Environment(getProgName)
 import System.Directory
-                           
-data Command = Command {
-        commandFunc :: [String] -> IO()
-        , helpFunc :: IO ()
-    }
+
+data JapexCommand = Command {
+		run :: [String] -> IO ()
+		, name :: String
+		, shortHelp :: String
+		, help :: String
+	}
+
+findByName :: [JapexCommand] -> String -> Maybe JapexCommand
+findByName commands comName = find ((== comName) . name) commands
 
 data QuizEntry = Quiz {
     japanese :: T.Text
@@ -38,7 +45,7 @@ parseAnswer = toAnswer . T.split (==':')
     where toAnswer [a,b,c] = Answer a b c
 
 formatAnswer :: AnswerEntry -> T.Text
-formatAnswer (Answer a b c) = T.intercalate (T.singleton ':') $ [a,b,c]
+formatAnswer (Answer a b c) = T.intercalate (T.singleton ':') [a,b,c]
 
 data CorrectedEntry = Correct Bool AnswerEntry
 

@@ -7,7 +7,7 @@ import Japex.Common
 import System.Console.GetOpt
 import System.Random
 
-numbersCommand = Command numbers (putStrLn $ usageInfo header options)
+numbersCommand = Command numbers "numbers" "Generates numbers to spell" (usageInfo header options)
 
 header = unlines [
     "Generates a random sequence of digits to spell"

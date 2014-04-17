@@ -15,7 +15,7 @@ import System.Random
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIo
 
-quizCommand = Command doQuiz (putStrLn helpMessage)
+quizCommand = Command doQuiz "vocabulary" "Exercises vocabulary" helpMessage
 
 doQuiz :: [String] -> IO ()
 doQuiz args = do
@@ -65,7 +65,7 @@ japexOpts = [
 
 argError m = putStrLn helpMessage >> (ioError . userError $ m)
 
-helpMessage = usageInfo "Usage: japex quiz [OPTIONS]" japexOpts
+helpMessage = usageInfo "Usage: japex vocabulary [OPTIONS]" japexOpts
 
 defaultOptions = Options 10 []
 

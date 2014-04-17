@@ -5,20 +5,15 @@ where
 import Japex.Common
 import Paths_japex
 
-helpCommand commands = Command (doHelp commands) printHelp
+helpCommand commands = Command (doHelp commands) "help" "Prints help" printHelp
 
-helpMessages = [
-            ("vocabulary", "Generates a quiz")
-            , ("numbers", "Generates number sequences to spell out")
-            , ("help", "Displays this help message")
-            ]
-
-doHelp commands [comm] = maybe noCommand helpFunc $ lookup comm commands
+doHelp :: [JapexCommand] -> [String] -> IO ()
+doHelp commands ["help"] = putStrLn printHelp
+doHelp commands [comm] = maybe noCommand (putStrLn . help) (findByName commands comm)
     where noCommand = ioError $ userError $ "Command " ++ comm ++ " does not exist"
-doHelp commands [] = putStrLn . unlines . map printCom $ helpMessages
-    where printCom (name, desc) = name ++ "\t" ++ desc
+doHelp commands [] = putStrLn . unlines . map (\c -> name c ++ "\t" ++ shortHelp c) $ commands
 
-printHelp = putStrLn $ unlines [
+printHelp = unlines [
     "Lists available commands"
     , "\tjapex help"
     , ""
