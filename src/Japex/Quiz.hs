@@ -2,6 +2,7 @@ module Japex.Quiz (
       quizCommand
     ) where
 
+import Control.Monad
 import Data.List
 import Japex.Common
 import Japex.Quiz.Common
@@ -21,11 +22,14 @@ doQuiz :: [String] -> IO ()
 doQuiz args = do
     seed <- randomIO
     defaultDatabase <- getDataFileName "database.txt"
-    ops <- processArgs args defaultDatabase seed
-    questions <- readQuizDatabaseFile . dbFile $ ops
-    answers <- quiz . selectExs ops $ questions
-    writeAnswerFile answers
+    let defaults = Options 10 [] defaultDatabase seed
+    either (ioError . userError) runQuiz $ processArgs args defaults
 
+runQuiz :: Options -> IO()
+runQuiz os = do
+    questions <- readQuizDatabaseFile $ dbFile os
+    quiz $ selectExs os questions
+    
 selectExs :: Options -> [QuizEntry] -> [QuizEntry]
 selectExs (Options lineCount cats _ seed) = take lineCount . shuffle seed . filterByCats cats
 
@@ -36,13 +40,10 @@ shuffle seed exs = map (exs !!) $ randomRs range $ mkStdGen seed
 filterByCats :: [T.Text] -> [QuizEntry] -> [QuizEntry]
 filterByCats cats = filter (null . (cats \\ ) . categories)
         
-processArgs args database seed
-    | not . null $ e = argError . init . concat $ e
-    | not . null $ a = argError "Too many arguments for quiz"
-    | otherwise = return o
-    where (userOs, a, e) = getOpt Permute japexOpts args
-          o = overrideDefault (defaultOptions database seed) userOs
-          overrideDefault = foldl (flip id) 
+processArgs args defaults =
+    case getOpt Permute japexOpts args of
+        (o,_,[]) -> Right $ foldr id defaults o
+        (_,_,e) -> Left $ concat e
 
 japexOpts = [
     Option "c" ["categories"]
@@ -67,8 +68,6 @@ argError m = putStrLn helpMessage >> (ioError . userError $ m)
 
 helpMessage = usageInfo "Usage: japex vocabulary [OPTIONS]" japexOpts
 
-defaultOptions = Options 10 []
-
 data Options = Options {
                   lineCount :: Int
                 , cats :: [T.Text]
@@ -76,9 +75,9 @@ data Options = Options {
                 , seed :: Int
                 }
 
-quiz :: [QuizEntry] -> IO [AnswerEntry]
-quiz = mapM (\ (Quiz japanese english _) -> do
-                    putStrLn . T.unpack $ japanese
-                    ua <- getLine
-                    return . Answer japanese english $ T.pack ua
+quiz :: [QuizEntry] -> IO ()
+quiz = mapM_ (\ (Quiz japanese english _) -> do
+                    putStrLn $ T.unpack japanese
+                    getLine
+                    putStrLn ("(" ++ T.unpack english ++ ")\n")
             )
