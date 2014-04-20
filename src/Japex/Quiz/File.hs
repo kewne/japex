@@ -24,10 +24,12 @@ readQuizDatabaseFile file = do
     input <- readFile file
     either (fail . show) return (runParser quizDatabaseParser () file input)
 
-quizDatabaseParser :: GenParser Char () [QuizEntry]
 quizDatabaseParser = endBy line eol
-line = do
-    jap <- T.pack <$> some (noneOf ":") <* char ':'
-    eng <- T.pack <$> some (noneOf ":") <* char ':'
-    cats <- map T.pack <$> some (noneOf ":,\n") `sepBy1` char ','
-    return $ Quiz jap eng cats
+
+line = Quiz <$> jap <*> eng <*> cats
+
+jap = T.pack <$> manyTill (noneOf ":") (char ':')
+
+eng = T.pack <$> manyTill (noneOf ":") (char ':')
+
+cats = map T.pack <$> some (noneOf ":,\n") `sepBy1` char ','
