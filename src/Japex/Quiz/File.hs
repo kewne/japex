@@ -1,38 +1,33 @@
 module Japex.Quiz.File
     (
         readQuizDatabaseFile
-        , generateResultFileName
-        , writeAnswerFile
-        , getUserQuizDir
     ) where
 
+import Control.Applicative
 import Control.Monad
+import Data.Functor.Identity
 import Data.List
-import qualified Data.Text as T
-import qualified Data.Text.IO as TIo
 import Data.Time.Clock
 import Data.Time.Format
 import Japex.Common
 import Japex.Quiz.Common (splitCategories)
 import System.FilePath
+import System.IO.Error
 import System.Locale
+import Text.Parsec.Extra
+import Text.Parsec.Prim (Parsec)
+import Text.ParserCombinators.Parsec hiding (many, (<|>))
+import qualified Data.Text as T
 
 readQuizDatabaseFile :: FilePath -> IO [QuizEntry]
-readQuizDatabaseFile = liftM extractExercises . TIo.readFile
+readQuizDatabaseFile file = do
+    input <- readFile file
+    either (fail . show) return (runParser quizDatabaseParser () file input)
 
-extractExercises :: T.Text -> [QuizEntry]
-extractExercises = map splitFields . T.lines
-    where splitFields = toQuiz . T.split (==':')
-          toQuiz [a,b,c] = Quiz a b (splitCategories c)
-
-getUserQuizDir = getJapexUserDataSubDir "quiz"
-
-writeAnswerFile :: [AnswerEntry] -> IO ()
-writeAnswerFile answers = (`TIo.writeFile` toAnswerString answers) =<< generateResultFileName
-
-generateResultFileName = do
-    quizSubDir <- getUserQuizDir
-    liftM ((quizSubDir </>) . formatTime defaultTimeLocale "%s") getCurrentTime
-
-toAnswerString :: [AnswerEntry] -> T.Text
-toAnswerString = T.unlines . map (\ (Answer q a ua) -> T.intercalate (T.singleton ':') [q,ua,a])
+quizDatabaseParser :: GenParser Char () [QuizEntry]
+quizDatabaseParser = endBy line eol
+line = do
+    jap <- T.pack <$> some (noneOf ":") <* char ':'
+    eng <- T.pack <$> some (noneOf ":") <* char ':'
+    cats <- map T.pack <$> some (noneOf ":,\n") `sepBy1` char ','
+    return $ Quiz jap eng cats

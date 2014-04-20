@@ -64,8 +64,6 @@ japexOpts = [
             "random seed to use"
      ]
 
-argError m = putStrLn helpMessage >> (ioError . userError $ m)
-
 helpMessage = usageInfo "Usage: japex vocabulary [OPTIONS]" japexOpts
 
 data Options = Options {
@@ -81,3 +79,5 @@ quiz = mapM_ (\ (Quiz japanese english _) -> do
                     getLine
                     putStrLn ("(" ++ T.unpack english ++ ")\n")
             )
+
+
