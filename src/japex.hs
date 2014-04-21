@@ -1,8 +1,10 @@
 import Data.List
 import Japex.Common
-import Japex.Quiz
+import Japex.Date
 import Japex.Help
 import Japex.Numbers
+import Japex.Quiz
+import Japex.Time
 import System.Environment(getArgs)
 import System.Exit
 import System.IO
@@ -10,6 +12,8 @@ import System.IO
 availableCommands = [
 	quizCommand
 	, numbersCommand
+    , datesCommand
+    , timesCommand
 	]
 
 helpForCommands = helpCommand availableCommands

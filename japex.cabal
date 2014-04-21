@@ -31,5 +31,6 @@ executable japex
                      text == 0.11.*,
                      parsec == 3.*,
                      parsec-extra == 0.1.*,
-                     transformers == 0.3.*
+                     transformers == 0.3.*,
+                     mtl == 2.1.*
   hs-source-dirs:    src
